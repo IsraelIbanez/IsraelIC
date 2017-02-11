@@ -22,9 +22,9 @@ import javax.swing.border.EmptyBorder;
  * 
  * Interfaz para nuestra calculadora basica
  * 
- * @author:  emmanuel 
- * @version:  1.0 
- * @date: 06-09-2015 
+ * @author:  Israel Ibañez
+ * @version:  1.1 
+ * @date: 10-02-2017 
  */
 public class Calculadora extends JFrame {
 
@@ -40,6 +40,7 @@ public class Calculadora extends JFrame {
 	double resultado;
 
         double resultado2;
+        /*Para guardar el resultado sin que este sea borrado al dar la tecla CE (tecla ANS en la calculadora científica)*/
         double ANS;
 	/** para guardar la operacion a realizar */
 	String operacion;
@@ -195,6 +196,7 @@ public class Calculadora extends JFrame {
 	/**
 	 * Calcula el resultado y lo muestra por pantalla
 	 */
+        /*Se le anadió las operaciones de potecnias, raíz, seno, coseno y tangente*/
 	private void calcularResultado() {
 		if (operacion.equals("+")) {
 			resultado += new Double(pantalla.getText());
