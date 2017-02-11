@@ -7,7 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.lang.Math;
+import java.math.BigInteger;
 import javax.swing.JButton;
 import javax.swing.JButton;
 
@@ -39,6 +40,7 @@ public class Calculadora extends JFrame {
 	double resultado;
 
         double resultado2;
+        double ANS;
 	/** para guardar la operacion a realizar */
 	String operacion;
 
@@ -53,7 +55,7 @@ public class Calculadora extends JFrame {
 	 */
 	public Calculadora() {
 		super();
-		setSize(250, 300);
+		setSize(400, 500);
 		setTitle("Calculadora Simple");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -64,7 +66,7 @@ public class Calculadora extends JFrame {
 
 		pantalla = new JTextField("0", 20);
 		pantalla.setBorder(new EmptyBorder(4, 4, 4, 4));
-		pantalla.setFont(new Font("Arial", Font.BOLD, 25));
+		pantalla.setFont(new Font("Arial", Font.BOLD, 35));
 		pantalla.setHorizontalAlignment(JTextField.RIGHT);
 		pantalla.setEditable(false);
 		pantalla.setBackground(Color.WHITE);
@@ -78,7 +80,7 @@ public class Calculadora extends JFrame {
 			nuevoBotonNumerico("" + n);
 		}
 
-		nuevoBotonNumerico(".");
+		
 
 		panel.add("Center", panelNumeros);
 
@@ -89,7 +91,13 @@ public class Calculadora extends JFrame {
 		nuevoBotonOperacion("+");
 		nuevoBotonOperacion("-");
 		nuevoBotonOperacion("*");
-		nuevoBotonOperacion("/");
+		nuevoBotonOperacion("/");                
+                nuevoBotonOperacion("^");
+                nuevoBotonOperacion("√");                
+                nuevoBotonOperacion("sin");
+                nuevoBotonOperacion("cos"); 
+                nuevoBotonOperacion("tan"); 
+                nuevoBotonOperacion("ANS"); 
 		nuevoBotonOperacion("=");
 		nuevoBotonOperacion("CE");
 
@@ -164,19 +172,23 @@ public class Calculadora extends JFrame {
 	private void operacionPulsado(String tecla) {
 		if (tecla.equals("=")) {
 			calcularResultado();
-		} else if (tecla.equals("CE")) {
+		} else if (tecla.equals("CE")) {                        
 			resultado = 0;
 			pantalla.setText("");
 			nuevaOperacion = true;
 		} else {
-			operacion = tecla;
-			if ((resultado > 0) && !nuevaOperacion) {
-				calcularResultado();
-			} else {
-				resultado = new Double(pantalla.getText());
-			}
-		}
-
+                    if(tecla.equals("ANS")){
+                    pantalla.setText("" + ANS);
+                    operacion = "";
+                }else{
+                     operacion = tecla;
+                     if ((resultado > 0) && !nuevaOperacion) {
+                        calcularResultado();
+                        } else {
+                            resultado = new Double(pantalla.getText());
+                        }
+                     }
+                }
 		nuevaOperacion = true;
 	}
 
@@ -192,9 +204,23 @@ public class Calculadora extends JFrame {
 			resultado /= new Double(pantalla.getText());
 		} else if (operacion.equals("*")) {
 			resultado *= new Double(pantalla.getText());
-		}
-
+		}else if (operacion.equals("^")){
+                        resultado = Math.pow(resultado,new Double(pantalla.getText()));
+                }else if (operacion.equals("√")){
+                        resultado = Math.pow(resultado,1/new Double(pantalla.getText()));
+                }else if (operacion.equals("sin")){  
+                    double radianes = Math.toRadians(new Double(pantalla.getText()));     
+                        resultado = Math.sin(radianes);
+                }else if (operacion.equals("cos")){
+                    double radianes = Math.toRadians(new Double(pantalla.getText()));     
+                        resultado = Math.cos(radianes);
+                }else if (operacion.equals("tan")){
+                    double radianes = Math.toRadians(new Double(pantalla.getText()));     
+                        resultado = Math.tan(radianes);
+                }                                                                
+                ANS = resultado;
 		pantalla.setText("" + resultado);
 		operacion = "";
+                
 	}
 }
