@@ -197,6 +197,7 @@ public class Calculadora extends JFrame {
 	 * Calcula el resultado y lo muestra por pantalla
 	 */
         /*Se le anadió las operaciones de potecnias, raíz, seno, coseno y tangente*/
+        
 	private void calcularResultado() {
 		if (operacion.equals("+")) {
 			resultado += new Double(pantalla.getText());
